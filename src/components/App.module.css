@@ -1,0 +1,47 @@
+.Wrapper {
+  background-image: url('./images/fon.jpg');
+  background-size: 100%;
+  width: 100%;
+  padding: 40px 0;
+  position: fixed;
+}
+
+.Container {
+  margin: 0 auto;
+  height: calc(100vh - 80px);
+  width: 1000px;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.Header {
+  width: 1000px;
+  position: fixed;
+  background-color: #bcbcbc;
+}
+
+.Header>h2 {
+  background-color: #313131;
+  margin: 0;
+  color: #bcbcbc;
+  text-align: center;
+  padding: 5px 0;
+}
+
+.Header>nav {
+  font-size: 1.5em;
+  padding: 10px 0;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.Main {
+  background-color: white;
+  padding: 120px 30px 30px 30px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
