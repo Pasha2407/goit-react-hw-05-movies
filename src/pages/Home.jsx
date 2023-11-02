@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Link } from 'react';
 import { fetchTrendingMovies } from '../components/api';
+import { MovieList } from 'components/MovieList';
 
 export const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -8,7 +9,6 @@ export const Home = () => {
       try {
         const data = await fetchTrendingMovies();
         setTrendingMovies(data);
-        console.log(data);
       } catch (error) {
       } finally {
       }
@@ -16,12 +16,5 @@ export const Home = () => {
     fetchMovies();
   }, []);
 
-  return (
-    <ul>
-      Trending movies today
-      {trendingMovies.map(item => {
-        return <li key={item.id}> {item.title}</li>;
-      })}
-    </ul>
-  );
+  return <MovieList movies={trendingMovies} />;
 };
