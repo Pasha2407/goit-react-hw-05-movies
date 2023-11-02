@@ -1,0 +1,24 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+}
+
+.Container>h2 {
+    margin: 0;
+}
+
+.List {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding-left: 0;
+    margin: 25px 0;
+
+}
+
+.List>li {
+    list-style-type: none;
+}
+
+.Image {
+    width: 100px;
+}

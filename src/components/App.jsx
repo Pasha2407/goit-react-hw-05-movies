@@ -1,6 +1,6 @@
 import { Home } from 'pages/Home';
 import { Movies } from 'pages/Movies';
-import { MovieDetails } from './MovieDetails/MovieDetails';
+import { MovieDetails } from '../pages/MovieDetails/MovieDetails';
 import { Routes, Route, Link } from 'react-router-dom';
 import css from './App.module.css';
 export const App = () => {

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { fetchMovieDetails } from 'components/api';
+import { fetchMovieDetails } from '../../components/api';
 import { useEffect, useState } from 'react';
 
 export const MovieDetails = () => {
@@ -25,6 +25,7 @@ export const MovieDetails = () => {
       <h2>Film - {movieDetails.title}</h2>
       <img
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+        alt={movieDetails.title}
         style={{
           width: 200,
         }}
