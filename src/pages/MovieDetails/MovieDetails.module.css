@@ -1,0 +1,9 @@
+.Wrapper {
+    padding: 30px;
+}
+
+.Container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px
+}

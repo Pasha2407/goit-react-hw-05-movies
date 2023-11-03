@@ -1,24 +1,37 @@
 .Container {
-    display: flex;
-    flex-direction: column;
+    padding: 30px;
 }
 
 .Container>h2 {
     margin: 0;
 }
 
-.List {
+.Container>ul {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 20px;
+    column-gap: 10px;
     padding-left: 0;
-    margin: 25px 0;
-
+    margin: 25px 0 0 0;
 }
 
-.List>li {
+.Container>ul>li {
     list-style-type: none;
+    background-color: #be4040;
+    border: 2px solid #be4040;
 }
 
-.Image {
-    width: 100px;
+.Container>ul>li>a {
+    text-decoration: none;
+}
+
+.Title {
+    min-height: 45px;
+}
+
+.Title>p {
+    margin: 2px 0;
+    color: white;
+    text-align: center;
+    font-size: 18px;
 }
