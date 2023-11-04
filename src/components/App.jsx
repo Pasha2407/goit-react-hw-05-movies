@@ -2,7 +2,6 @@ import { Suspense, lazy } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import css from './App.module.css';
 import { Home } from '../pages/Home';
-import { Loader } from './Loader';
 
 const Movies = lazy(() => import('../pages/Movies'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails/MovieDetails'));
@@ -37,7 +36,13 @@ export const App = () => {
           </nav>
         </header>
         <main>
-          <Suspense fallback={<Loader />}>
+          <Suspense
+            fallback={
+              <p style={{ paddingLeft: 30 }}>
+                <i>Loading...</i>
+              </p>
+            }
+          >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/movies" element={<Movies />} />

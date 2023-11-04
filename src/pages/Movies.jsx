@@ -8,6 +8,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [foundMovies, setFoundMovies] = useState([]);
   const [isLoading, setIsLoading] = useState();
+  const [found, setFound] = useState(false);
   const movieName = searchParams.get('query') || '';
 
   const handleSubmit = event => {
@@ -28,7 +29,12 @@ const Movies = () => {
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 700);
+        setTimeout(() => {
+          setFound(true);
+        }, 2000);
       }
     };
     search();
@@ -41,13 +47,8 @@ const Movies = () => {
         <input type="text" placeholder="type here" name="search" />
         <button type="submit">Search</button>
       </form>
-      {/* {foundMovies.length === 0 ? (
-        <p>please search</p>
-      ) : (
-        <MovieList movies={foundMovies} />
-      )} */}
-      {isLoading ? <Loader /> : <MovieList movies={foundMovies} />}
-      {!isLoading && foundMovies.length === 0 && movieName && (
+      {isLoading && movieName ? <Loader /> : <MovieList movies={foundMovies} />}
+      {found && !isLoading && foundMovies.length === 0 && movieName && (
         <h2>No movie found for the request "{movieName}"</h2>
       )}
     </div>

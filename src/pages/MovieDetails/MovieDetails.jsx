@@ -5,6 +5,7 @@ import css from './MovieDetails.module.css';
 import { Loader } from 'components/Loader';
 
 const MovieDetails = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [movieDetails, setMovieDetails] = useState([]);
   const { id } = useParams();
   const location = useLocation();
@@ -17,64 +18,97 @@ const MovieDetails = () => {
         setMovieDetails(movie);
       } catch (error) {
         console.error(error);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 700);
       }
     };
     movieDetails();
   }, [id]);
 
-  return (
-    <div className={css.Wrapper}>
-      <Link to={back.current}>Go back</Link>
-      <div className={css.Container}>
-        <aside>
-          <img
-            src={
-              movieDetails.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`
-                : require('../../components/images/noimage2.jpg')
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <div
+      style={{
+        backgroundImage:
+          'url(' +
+          `https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}` +
+          ')',
+        backgroundSize: '80%',
+        backgroundPositionX: 'center',
+        backgroundPositionY: '100px',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          backdropFilter: 'blur(5px)',
+        }}
+      >
+        <div className={css.Wrapper}>
+          <Link to={back.current}>Go back</Link>
+          <div className={css.Container}>
+            <aside>
+              <img
+                src={
+                  movieDetails.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`
+                    : require('../../components/images/noimage2.jpg')
+                }
+                alt={movieDetails.title}
+                style={{
+                  width: 200,
+                }}
+              />
+            </aside>
+            <div>
+              <h2>{movieDetails.title}</h2>
+              <b>User score: {movieDetails.vote_average}</b>
+              <h3>Overview</h3>
+              <p>{movieDetails.overview}</p>
+              <h3>Genres</h3>
+              <p>
+                {movieDetails.genres?.map(item => (
+                  <span key={item.id}> {item.name}</span>
+                ))}
+              </p>
+              <h3>Production companies</h3>
+              <section>
+                {movieDetails.production_companies?.map(
+                  item =>
+                    item.logo_path && (
+                      <img
+                        key={item.id}
+                        src={`https://image.tmdb.org/t/p/w500${item.logo_path}`}
+                        alt={item.name}
+                        style={{ width: 70 }}
+                      ></img>
+                    )
+                )}
+              </section>
+              <b>Release date: {movieDetails.release_date}</b>
+            </div>
+          </div>
+          <div>
+            <h2>Additional information</h2>
+            <Link to="cast">Cast</Link>
+            <Link to="reviews">Reviews</Link>
+          </div>
+          <Suspense
+            fallback={
+              <p style={{ paddingLeft: 30 }}>
+                <i>Loading...</i>
+              </p>
             }
-            alt={movieDetails.title}
-            style={{
-              width: 200,
-            }}
-          />
-        </aside>
-        <div>
-          <h2>{movieDetails.title}</h2>
-          <b>User score: {movieDetails.vote_average}</b>
-          <h3>Overview</h3>
-          <p>{movieDetails.overview}</p>
-          <h3>Genres</h3>
-          <p>
-            {movieDetails.genres?.map(item => (
-              <span key={item.id}> {item.name}</span>
-            ))}
-          </p>
-          <h3>Production companies</h3>
-          <section>
-            {movieDetails.production_companies?.map(
-              item =>
-                item.logo_path && (
-                  <img
-                    key={item.id}
-                    src={`https://image.tmdb.org/t/p/w500${item.logo_path}`}
-                    alt={item.name}
-                    style={{ width: 70 }}
-                  ></img>
-                )
-            )}
-          </section>
-          <b>Release date: {movieDetails.release_date}</b>
+          >
+            <Outlet />
+          </Suspense>
         </div>
       </div>
-      <div>
-        <h2>Additional information</h2>
-        <Link to="cast">Cast</Link>
-        <Link to="reviews">Reviews</Link>
-      </div>
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
     </div>
   );
 };
