@@ -2,6 +2,7 @@ import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../components/api';
 import { useEffect, useState, useRef, Suspense } from 'react';
 import css from './MovieDetails.module.css';
+import { Loader } from 'components/Loader';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
@@ -71,7 +72,7 @@ const MovieDetails = () => {
         <Link to="cast">Cast</Link>
         <Link to="reviews">Reviews</Link>
       </div>
-      <Suspense fallback={<div>Loading subpage...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </div>
