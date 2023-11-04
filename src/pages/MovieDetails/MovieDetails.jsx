@@ -1,9 +1,9 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../../components/api';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
 import css from './MovieDetails.module.css';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
   const { id } = useParams();
   const location = useLocation();
@@ -27,7 +27,11 @@ export const MovieDetails = () => {
       <div className={css.Container}>
         <aside>
           <img
-            src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+            src={
+              movieDetails.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`
+                : require('../../components/images/noimage2.jpg')
+            }
             alt={movieDetails.title}
             style={{
               width: 200,
@@ -67,7 +71,11 @@ export const MovieDetails = () => {
         <Link to="cast">Cast</Link>
         <Link to="reviews">Reviews</Link>
       </div>
-      <Outlet />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
+
+export default MovieDetails;

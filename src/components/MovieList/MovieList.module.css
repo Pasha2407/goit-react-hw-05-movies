@@ -1,27 +1,24 @@
-.Container {
-    padding: 30px;
-}
-
-.Container>h2 {
-    margin: 0;
-}
-
-.Container>ul {
+.List {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     row-gap: 20px;
-    column-gap: 10px;
+    column-gap: 12px;
     padding-left: 0;
     margin: 25px 0 0 0;
 }
 
-.Container>ul>li {
+.List>li {
     list-style-type: none;
     background-color: #be4040;
     border: 2px solid #be4040;
+    transition: transform 0.4s;
 }
 
-.Container>ul>li>a {
+.List>li:hover {
+    transform: scale(1.06);
+}
+
+.List>li>a {
     text-decoration: none;
 }
 

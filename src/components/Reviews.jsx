@@ -28,3 +28,5 @@ export const Reviews = () => {
     </div>
   );
 };
+
+export default Reviews;

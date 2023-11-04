@@ -39,12 +39,7 @@
 .Container>header>nav>a {
   padding: 5px;
   text-decoration: none;
-  color: black;
-}
-
-.Container>header>nav>a:hover {
-  background-color: rgba(190, 64, 64, 0.3);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .Container>main {
