@@ -18,13 +18,19 @@ export const Reviews = () => {
   }, [id]);
   return (
     <div>
-      <h2>Movie Reviews</h2>
-      {reviews.map(item => (
-        <div key={item.id}>
-          <p>{item.author}</p>
-          <p>{item.content}</p>
+      <h2>Movie Reviews 👇</h2>
+      {reviews.length > 0 ? (
+        <div>
+          {reviews.map(item => (
+            <div key={item.id}>
+              <b>{item.author}</b>
+              <p>{item.content}</p>
+            </div>
+          ))}
         </div>
-      ))}
+      ) : (
+        <i>No reviews found</i>
+      )}
     </div>
   );
 };

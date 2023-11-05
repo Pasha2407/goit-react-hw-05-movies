@@ -1,9 +1,53 @@
 .Wrapper {
-    padding: 30px;
+    padding: 15px 30px 60px 30px;
+}
+
+.Wrapper>a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 10px;
 }
 
 .Container {
     display: flex;
     flex-direction: row;
     gap: 20px
+}
+
+.Title>h2 {
+    margin-top: 0;
+    margin-bottom: 15px
+}
+
+.Title>h3 {
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.Title>p {
+    margin: 0;
+}
+
+.Title>section {
+    padding: 6px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+}
+
+.LinkButton>a {
+    background-color: #be4040;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    margin-right: 10px;
+}
+
+.LinkButton>a:hover {
+    background-color: #913131
 }

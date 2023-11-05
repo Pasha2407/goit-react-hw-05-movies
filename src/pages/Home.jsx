@@ -18,7 +18,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div style={{ padding: 30 }}>
+    <div style={{ padding: '20px 30px 30px 30px' }}>
       <h2 style={{ margin: 0 }}>Trending movies today</h2>
       <MovieList movies={trendingMovies} />
     </div>

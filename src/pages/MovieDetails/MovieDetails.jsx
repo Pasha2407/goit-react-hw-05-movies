@@ -3,6 +3,8 @@ import { fetchMovieDetails } from '../../components/api';
 import { useEffect, useState, useRef, Suspense } from 'react';
 import css from './MovieDetails.module.css';
 import { Loader } from 'components/Loader';
+import { IconContext } from 'react-icons';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
 const MovieDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +38,7 @@ const MovieDetails = () => {
           'url(' +
           `https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}` +
           ')',
-        backgroundSize: '80%',
+        backgroundSize: 'cover',
         backgroundPositionX: 'center',
         backgroundPositionY: '100px',
         backgroundRepeat: 'no-repeat',
@@ -45,12 +47,17 @@ const MovieDetails = () => {
     >
       <div
         style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.4)',
-          backdropFilter: 'blur(5px)',
+          backgroundColor: 'rgba(255, 255, 255, 0.5)',
+          backdropFilter: 'blur(8px)',
         }}
       >
         <div className={css.Wrapper}>
-          <Link to={back.current}>Go back</Link>
+          <Link to={back.current}>
+            <IconContext.Provider value={{ color: '#be4040', size: 30 }}>
+              <IoMdArrowRoundBack />
+            </IconContext.Provider>
+            Go back
+          </Link>
           <div className={css.Container}>
             <aside>
               <img
@@ -61,40 +68,52 @@ const MovieDetails = () => {
                 }
                 alt={movieDetails.title}
                 style={{
-                  width: 200,
+                  width: 240,
                 }}
               />
             </aside>
-            <div>
+            <div className={css.Title}>
               <h2>{movieDetails.title}</h2>
-              <b>User score: {movieDetails.vote_average}</b>
+              <b>User score: {Math.round(movieDetails.vote_average * 10)}%</b>
               <h3>Overview</h3>
-              <p>{movieDetails.overview}</p>
+              {movieDetails.overview.length > 0 ? (
+                <p> {movieDetails.overview}</p>
+              ) : (
+                <i>No overview found</i>
+              )}
               <h3>Genres</h3>
-              <p>
-                {movieDetails.genres?.map(item => (
-                  <span key={item.id}> {item.name}</span>
-                ))}
-              </p>
+              {movieDetails.genres.length > 0 ? (
+                <p>
+                  {movieDetails.genres?.map(item => (
+                    <span key={item.id}> {item.name}</span>
+                  ))}
+                </p>
+              ) : (
+                <i>No genres found</i>
+              )}
               <h3>Production companies</h3>
-              <section>
-                {movieDetails.production_companies?.map(
-                  item =>
-                    item.logo_path && (
-                      <img
-                        key={item.id}
-                        src={`https://image.tmdb.org/t/p/w500${item.logo_path}`}
-                        alt={item.name}
-                        style={{ width: 70 }}
-                      ></img>
-                    )
-                )}
-              </section>
-              <b>Release date: {movieDetails.release_date}</b>
+              {movieDetails.production_companies.length > 0 ? (
+                <section>
+                  {movieDetails.production_companies?.map(
+                    item =>
+                      item.logo_path && (
+                        <img
+                          key={item.id}
+                          src={`https://image.tmdb.org/t/p/w500${item.logo_path}`}
+                          alt={item.name}
+                          style={{ height: 30, maxWidth: 80 }}
+                        ></img>
+                      )
+                  )}
+                </section>
+              ) : (
+                <i>No company found</i>
+              )}
+              <h3>Release date: {movieDetails.release_date}</h3>
             </div>
           </div>
-          <div>
-            <h2>Additional information</h2>
+          <div className={css.LinkButton}>
+            <h3>Additional information</h3>
             <Link to="cast">Cast</Link>
             <Link to="reviews">Reviews</Link>
           </div>
