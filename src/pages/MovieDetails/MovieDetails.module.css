@@ -87,8 +87,14 @@
 }
 
 @media screen and (max-width: 450px) {
+    .Background {
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed;
+    }
+
     .Wrapper {
-        padding: 10px 15px 120px 15px;
+        padding: 10px 15px 50px 15px;
     }
 
     .Container>aside>img {
