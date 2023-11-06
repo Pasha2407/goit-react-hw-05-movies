@@ -7,6 +7,11 @@
     padding-left: 0;
 }
 
+.List>li>img {
+    width: 100%;
+    border-radius: 10px;
+}
+
 .ActorName {
     min-height: 45px;
 }

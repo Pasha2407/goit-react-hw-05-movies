@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieReviews } from './api';
+import { fetchMovieReviews } from 'service/api';
 
 export const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [found, setFound] = useState(false);
   const { id } = useParams();
+
   useEffect(() => {
     const movieReviews = async () => {
       try {
@@ -12,14 +14,17 @@ export const Reviews = () => {
         setReviews(response);
       } catch (error) {
         console.error(error);
+      } finally {
+        setFound(true);
       }
     };
     movieReviews();
   }, [id]);
+
   return (
     <div>
       <h2>Movie Reviews 👇</h2>
-      {reviews.length > 0 ? (
+      {reviews.length > 0 && (
         <div>
           {reviews.map(item => (
             <div key={item.id}>
@@ -28,9 +33,8 @@ export const Reviews = () => {
             </div>
           ))}
         </div>
-      ) : (
-        <i>No reviews found</i>
       )}
+      {found && reviews.length === 0 && <i>No reviews found</i>}
     </div>
   );
 };

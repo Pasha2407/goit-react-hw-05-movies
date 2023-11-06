@@ -1,12 +1,14 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import css from './App.module.css';
-import { Home } from '../pages/Home';
+import { Home } from 'pages/Home/Home';
 
-const Movies = lazy(() => import('../pages/Movies'));
-const MovieDetails = lazy(() => import('../pages/MovieDetails/MovieDetails'));
-const Cast = lazy(() => import('./Cast'));
-const Reviews = lazy(() => import('./Reviews'));
+const Movies = lazy(() => import('../../pages/Movies/Movies'));
+const MovieDetails = lazy(() =>
+  import('../../pages/MovieDetails/MovieDetails')
+);
+const Cast = lazy(() => import('../Cast/Cast'));
+const Reviews = lazy(() => import('../Reviews/Reviews'));
 
 export const App = () => {
   return (
@@ -14,7 +16,7 @@ export const App = () => {
       <div className={css.Container}>
         <header>
           <h2>PRO MOVIE SEARCHER</h2>
-          <nav id="nav">
+          <nav>
             <NavLink
               to="/"
               style={({ isActive }) => ({

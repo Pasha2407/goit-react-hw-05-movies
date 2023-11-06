@@ -3,6 +3,7 @@ import css from './MovieList.module.css';
 
 export const MovieList = ({ movies }) => {
   const location = useLocation();
+
   return (
     <div>
       <ul className={css.List}>
@@ -14,10 +15,9 @@ export const MovieList = ({ movies }) => {
                 src={
                   item.backdrop_path
                     ? `https://image.tmdb.org/t/p/w500${item.backdrop_path}`
-                    : require('../images/noimage1.jpg')
+                    : require('../../images/noimage1.jpg')
                 }
                 alt=""
-                style={{ width: '100%' }}
               ></img>
               <div className={css.Title}>
                 <p>{item.title}</p>

@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { searchMovies } from 'components/api';
+import { searchMovies } from 'service/api';
 import { MovieList } from 'components/MovieList/MovieList';
-import { Loader } from 'components/Loader';
+import { Loader } from 'components/Loader/Loader';
+import css from './Movies.module.css';
+import { BsSearch } from 'react-icons/bs';
+import { IconContext } from 'react-icons';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,12 +44,18 @@ const Movies = () => {
   }, [movieName]);
 
   return (
-    <div style={{ padding: 30 }}>
-      <h2 style={{ margin: 0 }}>Movie Search</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="type here" name="search" />
-        <button type="submit">Search</button>
-      </form>
+    <div className={css.Wrapper}>
+      <div className={css.Container}>
+        <h2>Movie Search</h2>
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="type here" name="search" />
+          <button type="submit">
+            <IconContext.Provider value={{ size: 20 }}>
+              <BsSearch />
+            </IconContext.Provider>
+          </button>
+        </form>
+      </div>
       {isLoading && movieName ? <Loader /> : <MovieList movies={foundMovies} />}
       {found && !isLoading && foundMovies.length === 0 && movieName && (
         <h2>No movie found for the request "{movieName}"</h2>

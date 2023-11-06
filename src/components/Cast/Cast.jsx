@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieCast } from './api';
+import { fetchMovieCast } from 'service/api';
 import css from './Cast.module.css';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
+  const [found, setFound] = useState(false);
   const { id } = useParams();
+
   useEffect(() => {
     const movieCast = async () => {
       try {
@@ -13,23 +15,25 @@ const Cast = () => {
         setCast(response);
       } catch (error) {
         console.error(error);
+      } finally {
+        setFound(true);
       }
     };
     movieCast();
   }, [id]);
+
   return (
     <div>
       <h2>Movie Cast 👇</h2>
-      {cast.length > 0 ? (
+      {cast.length > 0 && (
         <ul className={css.List}>
           {cast.map(item => (
             <li key={item.id}>
               <img
-                style={{ width: '100%', borderRadius: '10px' }}
                 src={
                   item.profile_path
                     ? `https://image.tmdb.org/t/p/w300${item.profile_path}`
-                    : require('./images/noimage2.jpg')
+                    : require('../../images/noimage2.jpg')
                 }
                 alt=""
               ></img>
@@ -39,9 +43,8 @@ const Cast = () => {
             </li>
           ))}
         </ul>
-      ) : (
-        <i>No cast found</i>
       )}
+      {found && cast.length === 0 && <i>No cast found</i>}
     </div>
   );
 };

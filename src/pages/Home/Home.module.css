@@ -1,0 +1,7 @@
+.Container {
+    padding: 20px 30px 30px 30px;
+}
+
+.Container>h2 {
+    margin: 0
+}

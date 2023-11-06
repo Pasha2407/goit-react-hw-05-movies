@@ -1,8 +1,8 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { fetchMovieDetails } from '../../components/api';
+import { fetchMovieDetails } from 'service/api';
 import { useEffect, useState, useRef, Suspense } from 'react';
 import css from './MovieDetails.module.css';
-import { Loader } from 'components/Loader';
+import { Loader } from 'components/Loader/Loader';
 import { IconContext } from 'react-icons';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
@@ -33,24 +33,15 @@ const MovieDetails = () => {
     <Loader />
   ) : (
     <div
+      className={css.Background}
       style={{
         backgroundImage:
           'url(' +
           `https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}` +
           ')',
-        backgroundSize: 'cover',
-        backgroundPositionX: 'center',
-        backgroundPositionY: '100px',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
       }}
     >
-      <div
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.5)',
-          backdropFilter: 'blur(8px)',
-        }}
-      >
+      <div className={css.BackgroundFilter}>
         <div className={css.Wrapper}>
           <Link to={back.current}>
             <IconContext.Provider value={{ color: '#be4040', size: 30 }}>
@@ -64,12 +55,9 @@ const MovieDetails = () => {
                 src={
                   movieDetails.poster_path
                     ? `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`
-                    : require('../../components/images/noimage2.jpg')
+                    : require('../../images/noimage2.jpg')
                 }
                 alt={movieDetails.title}
-                style={{
-                  width: 240,
-                }}
               />
             </aside>
             <div className={css.Title}>
@@ -92,22 +80,26 @@ const MovieDetails = () => {
                 <i>No genres found</i>
               )}
               <h3>Production companies</h3>
-              {movieDetails.production_companies.length > 0 ? (
+              {movieDetails.production_companies.length > 0 && (
                 <section>
-                  {movieDetails.production_companies?.map(
-                    item =>
-                      item.logo_path && (
+                  {movieDetails.production_companies?.map(item => (
+                    <div key={item.id} className={css.Companies}>
+                      {item.logo_path ? (
                         <img
-                          key={item.id}
                           src={`https://image.tmdb.org/t/p/w500${item.logo_path}`}
-                          alt={item.name}
-                          style={{ height: 30, maxWidth: 80 }}
+                          alt=""
                         ></img>
-                      )
-                  )}
+                      ) : (
+                        <div>
+                          <p>{item.name}</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </section>
-              ) : (
-                <i>No company found</i>
+              )}
+              {movieDetails.production_companies.length === 0 && (
+                <i>No companies found</i>
               )}
               <h3>Release date: {movieDetails.release_date}</h3>
             </div>
