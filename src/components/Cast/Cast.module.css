@@ -21,3 +21,19 @@
     text-align: center;
     font-size: 17px;
 }
+
+@media screen and (max-width: 450px) {
+    .Title {
+        font-size: 20px;
+    }
+
+    .List {
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 15px;
+        column-gap: 10px;
+    }
+
+    .ActorName>p {
+        font-size: 14px;
+    }
+}

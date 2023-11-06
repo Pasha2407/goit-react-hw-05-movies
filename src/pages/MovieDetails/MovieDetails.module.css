@@ -85,3 +85,50 @@
 .LinkButton>a:hover {
     background-color: #913131
 }
+
+@media screen and (max-width: 450px) {
+    .Wrapper {
+        padding: 10px 15px 120px 15px;
+    }
+
+    .Container>aside>img {
+        width: 120px;
+    }
+
+    .Title>h2 {
+        font-size: 16px;
+    }
+
+    .Title>h3 {
+        font-size: 14px;
+    }
+
+    .Title>p {
+        font-size: 12px;
+    }
+
+    .Title>b {
+        font-size: 14px;
+    }
+
+    .Title>section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 6px 0;
+        row-gap: 10px;
+    }
+
+    .Companies {
+        display: flex;
+        justify-content: center;
+    }
+
+    .Companies>img {
+        height: 20px;
+        max-width: 60px;
+    }
+
+    .LinkButton>h3 {
+        font-size: 18px;
+    }
+}

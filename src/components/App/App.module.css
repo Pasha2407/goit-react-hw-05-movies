@@ -50,3 +50,19 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+@media screen and (max-width: 450px) {
+  .Container {
+    width: 100%
+  }
+
+  .Container>header>h2 {
+    font-size: 20px;
+  }
+
+  .Container>header>nav {
+    font-size: 1.2em;
+    gap: 10px;
+    margin-left: 20px;
+  }
+}
